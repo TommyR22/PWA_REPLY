@@ -1,45 +1,40 @@
-## Usage
-Download and use a web server like: https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb
+## Install
+Download and use a web server like: [web-server-for-chrome](https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb)
 
-# TODO
+or use python: `python -m SimpleHTTPServer` (Python 2.7) / `python -m http.server --cgi 8000` (Python 3.7)
 
--   Manifest
-    <!--<link rel="manifest" href="manifest.json">-->
+#TODO
 
-    <!--Add to home screen for Safari on iOS-->
-    <!--<meta name="apple-mobile-web-app-capable" content="yes">-->
-    <!--<meta name="apple-mobile-web-app-status-bar-style" content="black">-->
-    <!--<meta name="apple-mobile-web-app-title" content="Weather Reply">-->
-    <!--<link rel="apple-touch-icon" href="images/icons/icon-152x152.png">-->
-    <!--<meta name="msapplication-TileImage" content="images/icons/icon-144x144.png">-->
-    <!--<meta name="msapplication-TileColor" content="#2F3BA2">-->
+## Manifest
+* create manifest.json and add it to project.
+    * you can find icons in `images/icons` folder.
+* link it to index.html
+* test it with Chrome DevTool.
     
--   Cache localStorage
-    add : app.saveSelectedCities(); in document.getElementById('butAddCity')
-    add:  app.saveSelectedCities(); in startup code.
+## Cache localStorage
+* create a function to save `app.selectedCities` in localStorage.
+* call this function in `butAddCity` eventListener.
+* call this function in startup code.
 
-    app.saveSelectedCities = function () {
-            var selectedCities = JSON.stringify(app.selectedCities);
-            localStorage.selectedCities = selectedCities;
-    };
+## Service Worker
+* create a service worker file
+    * handle INSTALL, ACTIVATE and FETCH event.
+    * In FETCH event, use a cache pattern.
+* register it in app.js
+* (OPTIONAL) change pattern ServiceWorker
+* (OPTIONAL) push notification
+    * follow this guide: https://developers.google.com/web/ilt/pwa/introduction-to-push-notifications
+    * add in manifest.json: "gcm_sender_id": "ID_NUMBER"
+    * curl "ENDPOINT_URL" --request POST --header "TTL: 60" --header "Content-Length: 0" --header "Authorization: key=SERVER_KEY"
 
--   Service Worker
-
-    - change pattern SW
-
-    - push notification
-        https://developers.google.com/web/ilt/pwa/introduction-to-push-notifications
-
-        add in manifest.json: "gcm_sender_id": "44474987793"
-
-        curl "ENDPOINT_URL" --request POST --header "TTL: 60" --header "Content-Length: 0" --header "Authorization: key=SERVER_KEY"
-
-        Chrome bug: https://github.com/GoogleChromeLabs/web-push-codelab/issues/49
+Chrome bug: https://github.com/GoogleChromeLabs/web-push-codelab/issues/49
 
 
--   Change localStorage with IndexedDb
+## IndexedDB
+Change localStorage with IndexedDB
 
--   Google Lighthouse
+# Testing
+* use Google Lighthouse
 
 
 
