@@ -308,7 +308,7 @@
      * discussion.
      */
     var initialWeatherForecast = {
-        key: '12844099',
+        key: '725003',
         label: 'Turin, IT'
     };
 
